@@ -1,11 +1,21 @@
-//INCLUDE
 #include <iostream>
 #include <vector>
 #include <memory>
 #include <cstdlib>
 #include <ctime>
 
-//ENUMS
+
+//--------------------------------------------
+
+
+enum E_player
+{
+    E_warrior,
+    E_rogue,
+    E_mage
+};
+
+
 enum E_enemy
 {
     E_orc,
@@ -14,121 +24,165 @@ enum E_enemy
 };
 
 
-//ENEMIES
-class Enemy
+//--------------------------------------------
+
+
+class Character
 {
 public:
-    std::string enemy_name;
-    int enemy_health;
-    int enemy_mana;
-    int enemy_max_health;
-    int enemy_max_mana;
-    int enemy_strenght;
-    int enemy_dexterity;
-    int enemy_vitality;
-    int enemy_energy;
-    int enemy_action = 5;
+    std::string c_name;
+    int c_hitpoints;
+    int c_hitpoints_max;
+    int c_strenght;
 
-
-    Enemy() = default;
-    void print();
-    virtual void attack() = 0;
-    ~Enemy()= default;
+    Character() = default;
+    ~Character() = default;
 
 };
 
-void Enemy::print()
-{
-    std::cout << "----------" << '\n';
-    std::cout << "[  name  ]: " << enemy_name << '\n';
-    std::cout << "[ health ]: " << enemy_health << '/' << enemy_max_health << '\n';
-    std::cout << "[  mana  ]: " << enemy_mana << '/' << enemy_max_mana << '\n';
-    std::cout << "[ STR:" << enemy_strenght << " DEX:" << enemy_dexterity;
-    std::cout << " VIT:" << enemy_vitality << " ENE:" << enemy_energy << " ]" << '\n' << '\n';
-}
 
-class Orc: public Enemy
+//--------------------------------------------
+
+
+class Player: public Character
 {
 public:
-    Orc()
+
+};
+
+
+    class Warrior: public Player
     {
-        enemy_name = "Orc";
-        enemy_strenght = 25;
-        enemy_dexterity = 5;
-        enemy_vitality = 20;
-        enemy_energy = 10;
-        enemy_health = 3*enemy_vitality;
-        enemy_mana = 1*enemy_energy;
-        enemy_max_health = enemy_health;
-        enemy_max_mana = enemy_mana;
+    public:
+        Warrior()
+        {
 
-
-    }
-    void attack()
-    {
-
+        }
     };
-};
 
 
-class Goblin: public Enemy
+    class Rogue: public Player
+    {
+    public:
+        Rogue()
+        {
+
+        }
+    };
+
+
+    class Mage: public Player
+    {
+    public:
+        Mage()
+        {
+
+        }
+    };
+
+
+//--------------------------------------------
+
+
+class Enemy: public Character
 {
 public:
-    Goblin()
-    {
-        enemy_name = "Goblin";
-        enemy_strenght = 15;
-        enemy_dexterity = 15;
-        enemy_vitality = 15;
-        enemy_energy = 15;
-        enemy_health = 1.5*enemy_vitality;
-        enemy_mana = 1.5*enemy_energy;
-        enemy_max_health = enemy_health;
-        enemy_max_mana = enemy_mana;
-    }
-    void attack() {};
+
 };
 
-class Warlock: public Enemy
-{
-public:
-    Warlock()
-    {
-        enemy_name = "Warlock";
-        enemy_strenght = 5;
-        enemy_dexterity = 10;
-        enemy_vitality = 5;
-        enemy_energy = 30;
-        enemy_health = 1*enemy_vitality;
-        enemy_mana = 3*enemy_energy;
-        enemy_max_health = enemy_health;
-        enemy_max_mana = enemy_mana;
-    }
-    void attack() {};
-};
 
-//FACTORY
+    class Orc: public Enemy
+    {
+    public:
+        Orc()
+        {
+
+        }
+    };
+
+
+    class Goblin: public Enemy
+    {
+    public:
+        Goblin()
+        {
+
+        }
+    };
+
+
+    class Warlock: public Enemy
+    {
+    public:
+        Warlock()
+        {
+
+        }
+    };
+
+
+//--------------------------------------------
+
+
 class Factory
 {
 public:
     Factory() = default;
-    static std::shared_ptr<Enemy> createEnemy(E_enemy type);
+    static std::shared_ptr<Character> createPlayer(E_player type);
+    static std::shared_ptr<Character> createEnemy(E_enemy type);
 };
 
-std::shared_ptr<Enemy> Factory::createEnemy(E_enemy type)
-{
-    switch(type)
+
+    std::shared_ptr<Character> Factory::createPlayer(E_player type)
     {
-        case E_orc:
-            return std::make_shared<Orc>();
-        case E_goblin:
-            return std::make_shared<Goblin>();
-        case E_warlock:
-            return std::make_shared<Warlock>();
-        default:
-            return nullptr;
+        switch(type)
+        {
+            case E_warrior:
+                return std::make_shared<Warrior>();
+            case E_rogue:
+                return std::make_shared<Rogue>();
+            case E_mage:
+                return std::make_shared<Mage>();
+            default:
+                return nullptr;
+        }
     }
+
+
+    std::shared_ptr<Character> Factory::createEnemy(E_enemy type)
+    {
+        switch(type)
+        {
+            case E_orc:
+                return std::make_shared<Orc>();
+            case E_goblin:
+                return std::make_shared<Goblin>();
+            case E_warlock:
+                return std::make_shared<Warlock>();
+            default:
+                return nullptr;
+        }
+    }
+
+
+//--------------------------------------------
+//--------------------------------------------
+//--------------------------------------------
+//--------------------------------------------
+
+
+int main()
+{
+    return 0;
 }
+
+/*
+
+
+
+
+//FACTORY
+
 
 
 //MAIN
@@ -158,4 +212,4 @@ int main()
         enemies[i]->print();
     }
     return 0;
-}
+}*/
