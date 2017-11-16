@@ -3,3 +3,12 @@
 //
 
 #include "Warlock.h"
+
+void Warlock::printCharacter()
+{
+    std::cout << "      _" << '\n';
+    std::cout << "    @(O)" << '\n';
+    std::cout << "    |/|\\" << '\n';
+    std::cout << "    | |" << '\n';
+    std::cout << "    |/ \\" << '\n';
+}

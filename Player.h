@@ -18,6 +18,7 @@ class Player: public Character
 {
 public:
     E_player id;
+
 };
 
 

@@ -3,3 +3,12 @@
 //
 
 #include "Warrior.h"
+
+void Warrior::printCharacter()
+{
+    std::cout << "     |_|" << '\n';
+    std::cout << "     [_] /" << '\n';
+    std::cout << "    /\\|\\/_" << '\n';
+    std::cout << "    \\/|/" << '\n';
+    std::cout << "     / \\" << '\n';
+}

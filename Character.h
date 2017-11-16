@@ -6,12 +6,8 @@
 #define GAME_CHARACTER_H
 
 #include <iostream>
+#include "Move.h"
 
-enum E_move
-{
-    E_attack,
-    E_heal
-};
 
 
 class Character
@@ -25,6 +21,9 @@ public:
 
     Character() = default;
     ~Character() = default;
+
+    //virtual //change_hitpoints()
+    virtual void printCharacter() =0;
 };
 
 

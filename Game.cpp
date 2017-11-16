@@ -41,15 +41,21 @@ std::vector<std::shared_ptr<Enemy>> Game::create_Enemy(std::vector<std::shared_p
 
 std::vector<Move*> Game::create_moves(std::vector<Move*> moves)
 {
-    moves.push_back (new Move(E_attack,"Attack",0,20));
-    moves.push_back (new Move(E_heal,"Heal",1,10));
+    moves.push_back (new Move(E_attack,"Fast attack",0,20,90,5));
+    moves.push_back (new Move(E_pow_attack,"Powerful swing",0,40,70,10));
+    moves.push_back (new Move(E_throw_attack,"Throw weapon",0,50,50,15));
+    moves.push_back (new Move(E_heal,"Wound heal",1,10,100,10));
+
     return moves;
 }
 
-void Game::print_attacks()
+void Game::print_attacks(std::shared_ptr<Player> player, std::vector<Move*> moves)
 {
     int x;
     std::cin >> x;
+    E_move mov = player->moves[x];
+
+
 }
 
 void Game::print_battle(std::shared_ptr<Player> player, std::shared_ptr<Enemy> enemy)
@@ -58,74 +64,10 @@ void Game::print_battle(std::shared_ptr<Player> player, std::shared_ptr<Enemy> e
     std::cout << "-------------" << '\n';
     std::cout << enemy->c_name << '\n';
     std::cout << enemy->c_hitpoints << "|" << enemy->c_hitpoints_max << '\n';
-    switch(enemy->id)
-    {
-        case E_orc:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     )_(" << '\n';
-            std::cout << "   C|/|\\|D" << '\n';
-            std::cout << "    | | |" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_goblin:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     \\_/" << '\n';
-            std::cout << "   |\\/|\\|" << '\n';
-            std::cout << "   \\_\\| |" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_warlock:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "    @(O)" << '\n';
-            std::cout << "    |/|\\" << '\n';
-            std::cout << "    | |" << '\n';
-            std::cout << "    |/ \\" << '\n';
-        }
-            break;
-        default:
-            break;
-    }
-
+    enemy->printCharacter ();
     std::cout << '\n';
     std::cout << '\n';
-
-    switch(player->id)
-    {
-        case E_warrior:
-        {
-            std::cout << "     |_|" << '\n';
-            std::cout << "     [_] /" << '\n';
-            std::cout << "    /\\|\\/_" << '\n';
-            std::cout << "    \\/|/" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_rogue:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     /_\\" << '\n';
-            std::cout << "    \\/|\\/" << '\n';
-            std::cout << "      |" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_mage:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     (0) *" << '\n';
-            std::cout << "     /|\\/" << '\n';
-            std::cout << "      |/" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        default:
-            break;
-    }
+    player->printCharacter ();
     std::cout << player->c_name << '\n';
     std::cout << player->c_hitpoints << "|" << player->c_hitpoints_max << '\n';
     std::cout << "-------------" << '\n';
@@ -159,4 +101,9 @@ void Game::print_moves(std::shared_ptr<Player> player,std::vector<Move*> moves)
         }
     }
 
+}
+
+void calc_Battle(std::shared_ptr<Player> player,std::shared_ptr<Enemy> enemy)
+{
+    player->c_hitpoints -= 10;
 }

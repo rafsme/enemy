@@ -27,8 +27,10 @@ public:
     std::vector<Move*> create_moves(std::vector<Move*> moves);
     void print_battle(std::shared_ptr<Player> player, std::shared_ptr<Enemy> enemy);
     void print_moves(std::shared_ptr<Player> player,std::vector<Move*> moves);
-    void print_attacks();
+    void print_attacks(std::shared_ptr<Player> player, std::vector<Move*> moves);
     void showMove(std::shared_ptr<Player> player);
+    void calc_Battle(std::shared_ptr<Player> player,std::shared_ptr<Enemy> enemy);
+
 };
 
 

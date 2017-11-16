@@ -24,7 +24,8 @@ int main()
         game->enemies = game->create_Enemy (game->enemies);
         game->print_battle (game->players[0] , game->enemies[0]);
         game->print_moves (game->players[0],game->moves);
-        game->print_attacks();
+        game->print_attacks(game->players[0],game->moves);
+        //game->calc_Battle (game->players[0],game->enemies[0]);
     };
     return 0;
 }
