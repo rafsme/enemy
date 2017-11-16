@@ -29,6 +29,7 @@ public:
     void print_moves(std::shared_ptr<Player> player,std::vector<Move*> moves);
     void print_attacks();
     void showMove(std::shared_ptr<Player> player);
+    int print_Main_Menu(Game* game);
 };
 
 

@@ -22,6 +22,7 @@ public:
         moves[2] = E_attack;
         moves[3] = E_heal;
     }
+    void printCharacter();
 };
 
 

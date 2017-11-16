@@ -3,3 +3,11 @@
 //
 
 #include "Goblin.h"
+void Goblin::printCharacter()
+{
+    std::cout << "      _" << '\n';
+    std::cout << "     \\_/" << '\n';
+    std::cout << "   |\\/|\\|" << '\n';
+    std::cout << "   \\_\\| |" << '\n';
+    std::cout << "     / \\" << '\n';
+}

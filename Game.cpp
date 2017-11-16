@@ -7,8 +7,17 @@
 
 std::vector<std::shared_ptr<Player>> Game::create_Player(std::vector<std::shared_ptr<Player>> players)
 {
+
     Factory* factory = new Factory();
-    int x = (std::rand () % 3);
+
+    std::cout << "[1]: Warrior\n";
+    std::cout << "[2]: Rogue\n";
+    std::cout << "[3]: Mage\n";
+    std::cout << "[>]: ";
+
+    int x;
+    std::cin >> x;
+
     switch (x)
     {
         case E_warrior:
@@ -18,6 +27,7 @@ std::vector<std::shared_ptr<Player>> Game::create_Player(std::vector<std::shared
         case E_mage:
             players.push_back (factory->createPlayer (E_mage));
     }
+    delete factory;
     return players;
 }
 
@@ -35,6 +45,7 @@ std::vector<std::shared_ptr<Enemy>> Game::create_Enemy(std::vector<std::shared_p
         case E_warlock:
             enemies.push_back (factory->createEnemy (E_warlock));
     }
+    delete factory;
     return enemies;
 }
 
@@ -58,74 +69,10 @@ void Game::print_battle(std::shared_ptr<Player> player, std::shared_ptr<Enemy> e
     std::cout << "-------------" << '\n';
     std::cout << enemy->c_name << '\n';
     std::cout << enemy->c_hitpoints << "|" << enemy->c_hitpoints_max << '\n';
-    switch(enemy->id)
-    {
-        case E_orc:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     )_(" << '\n';
-            std::cout << "   C|/|\\|D" << '\n';
-            std::cout << "    | | |" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_goblin:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     \\_/" << '\n';
-            std::cout << "   |\\/|\\|" << '\n';
-            std::cout << "   \\_\\| |" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_warlock:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "    @(O)" << '\n';
-            std::cout << "    |/|\\" << '\n';
-            std::cout << "    | |" << '\n';
-            std::cout << "    |/ \\" << '\n';
-        }
-            break;
-        default:
-            break;
-    }
-
+    enemy->printCharacter ();
     std::cout << '\n';
     std::cout << '\n';
-
-    switch(player->id)
-    {
-        case E_warrior:
-        {
-            std::cout << "     |_|" << '\n';
-            std::cout << "     [_] /" << '\n';
-            std::cout << "    /\\|\\/_" << '\n';
-            std::cout << "    \\/|/" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_rogue:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     /_\\" << '\n';
-            std::cout << "    \\/|\\/" << '\n';
-            std::cout << "      |" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        case E_mage:
-        {
-            std::cout << "      _" << '\n';
-            std::cout << "     (0) *" << '\n';
-            std::cout << "     /|\\/" << '\n';
-            std::cout << "      |/" << '\n';
-            std::cout << "     / \\" << '\n';
-        }
-            break;
-        default:
-            break;
-    }
+    player->printCharacter ();
     std::cout << player->c_name << '\n';
     std::cout << player->c_hitpoints << "|" << player->c_hitpoints_max << '\n';
     std::cout << "-------------" << '\n';
@@ -159,4 +106,34 @@ void Game::print_moves(std::shared_ptr<Player> player,std::vector<Move*> moves)
         }
     }
 
+}
+
+int Game::print_Main_Menu(Game* game)
+{
+
+    while(1)
+    {
+        std::cout << "[1]: Create \n";
+
+        std::cout << "[2]: Select \n";
+        std::cout << "[3]: Stats \n";
+        std::cout << "[4]: Battle \n";
+        std::cout << "[0]: Exit \n";
+        std::cout << "[>]: ";
+        int x;
+        std::cin >> x;
+        switch(x)
+        {
+            case 1:
+            {
+                game->create_Player(game->players);
+            }
+            break;
+            case 0:
+            {
+                std::cout << "Exit Game";
+                return 0;
+            }
+    }
+    }
 }

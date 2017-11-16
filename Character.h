@@ -25,6 +25,7 @@ public:
 
     Character() = default;
     ~Character() = default;
+    virtual void printCharacter() = 0;
 };
 
 
