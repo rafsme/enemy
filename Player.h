@@ -19,6 +19,9 @@ class Player: public Character
 {
 public:
     E_player id;
+    Player(E_player id_player, std::string name, int hitpoints, int strenght):
+            id(id_player),Character(name,hitpoints,hitpoints,strenght)
+    {}
 };
 
 

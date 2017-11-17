@@ -6,6 +6,7 @@
 #define GAME_CHARACTER_H
 
 #include <iostream>
+#include <array>
 
 enum E_move
 {
@@ -21,12 +22,18 @@ public:
     int c_hitpoints;
     int c_hitpoints_max;
     int c_strenght;
-    E_move moves[4];
+    std::array<E_move,4> moves;
 
     Character() = default;
     ~Character() = default;
+
+    Character(std::string name,int hitpoints,int hitpoints_max,int strenght):
+            c_name(name),c_hitpoints(hitpoints),c_hitpoints_max(hitpoints_max),c_strenght(strenght)
+    {}
+
     virtual void printCharacter() = 0;
 };
+
 
 
 #endif //GAME_CHARACTER_H

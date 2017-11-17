@@ -10,13 +10,8 @@
 class Mage: public Player
 {
 public:
-    Mage()
+    Mage():Player(E_mage,"Mage",100,20)
     {
-        id = E_mage;
-        c_name = "Mage";
-        c_hitpoints_max = 100;
-        c_hitpoints = c_hitpoints_max;
-        c_strenght = 20;
         moves[0] = E_attack;
         moves[1] = E_heal;
         moves[2] = E_attack;
