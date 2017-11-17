@@ -8,17 +8,15 @@
 
 void Game::show_Stats(std::shared_ptr<Player> players)
 {
-    std::cout << "\n  [name]:" << players->c_name << '\n';
-    std::cout << "  [health]:" << players->c_hitpoints << "/" << players->c_hitpoints_max << '\n';
-    std::cout << "  [strength]:" << players->c_strength << "\n\n";
+    std::cout << '\n' <<" [  name  ]: " << players->c_name << '\n';
+    std::cout <<        " [ health ]: " << players->c_hitpoints << "/" << players->c_hitpoints_max << '\n';
+    std::cout <<        " [strength]: " << players->c_strength << "\n\n";
     players->printCharacter ();
     std::cout << '\n';
 }
 
 std::vector<std::shared_ptr<Player>> Game::create_Player(std::vector<std::shared_ptr<Player>> &players)
 {
-
-    Factory* factory = new Factory();
     while(1)
     {
         std::cout << "\n[--> New Character\n\n";
@@ -36,22 +34,19 @@ std::vector<std::shared_ptr<Player>> Game::create_Player(std::vector<std::shared
             {
                 case E_warrior:
                 {
-                    players.push_back (factory->createPlayer (E_warrior));
-                    delete factory;
+                    players.push_back (Factory::getInstance ().createPlayer (E_warrior));
                     return players;
                 }
 
                 case E_rogue:
                 {
-                    players.push_back (factory->createPlayer (E_rogue));
-                    delete factory;
+                    players.push_back (Factory::getInstance ().createPlayer (E_rogue));
                     return players;
                 }
 
                 case E_mage:
                 {
-                    players.push_back (factory->createPlayer (E_mage));
-                    delete factory;
+                    players.push_back (Factory::getInstance ().createPlayer (E_mage));
                     return players;
                 }
 
@@ -168,7 +163,7 @@ int Game::print_Main_Menu(Game* game)
         std::cout << "\n[>]: ";
         int x;
         std::cin >> x;
-        if (std::isdigit( x)==0)
+        if (x==0 || x==1 || x==2 || x==3 || x==4)
         {
             switch (x)
             {
@@ -179,7 +174,8 @@ int Game::print_Main_Menu(Game* game)
                     break;
                 case 3:
                 {
-                    show_Stats (players.at(players.size ()-1));
+                    if(players.size () != 0)
+                        show_Stats (players.at(players.size ()-1));
                 }
                     break;
                 case 0:
@@ -190,6 +186,11 @@ int Game::print_Main_Menu(Game* game)
                 default:
                     std::cout << "\n";
             }
+        }
+        else
+        {
+            std::cout << "\n";
+            x=0;
         }
     }
 }
