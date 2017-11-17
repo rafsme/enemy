@@ -16,7 +16,7 @@ public:
         c_name = "Orc";
         c_hitpoints_max = 50;
         c_hitpoints = c_hitpoints_max;
-        c_strenght = 20;
+        c_strength = 20;
         moves[0] = E_attack;
         moves[1] = E_heal;
         moves[2] = E_attack;

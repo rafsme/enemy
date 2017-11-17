@@ -16,7 +16,7 @@ public:
         c_name = "Warlock";
         c_hitpoints_max = 100;
         c_hitpoints = c_hitpoints_max;
-        c_strenght = 30;
+        c_strength = 30;
         moves[0] = E_attack;
         moves[1] = E_heal;
         moves[2] = E_attack;

@@ -16,7 +16,7 @@ public:
         c_name = "Goblin";
         c_hitpoints_max = 25;
         c_hitpoints = c_hitpoints_max;
-        c_strenght = 10;
+        c_strength = 10;
         moves[0] = E_attack;
         moves[1] = E_heal;
         moves[2] = E_attack;

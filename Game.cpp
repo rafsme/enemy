@@ -6,6 +6,15 @@
 #include "Factory.h"
 #include <cctype>
 
+void Game::show_Stats(std::shared_ptr<Player> players)
+{
+    std::cout << "\n  [name]:" << players->c_name << '\n';
+    std::cout << "  [health]:" << players->c_hitpoints << "/" << players->c_hitpoints_max << '\n';
+    std::cout << "  [strength]:" << players->c_strength << "\n\n";
+    players->printCharacter ();
+    std::cout << '\n';
+}
+
 std::vector<std::shared_ptr<Player>> Game::create_Player(std::vector<std::shared_ptr<Player>> &players)
 {
 
@@ -163,11 +172,18 @@ int Game::print_Main_Menu(Game* game)
         {
             switch (x)
             {
-                case 1: {
+                case 1:
+                {
                     game->create_Player (game->players);
                 }
                     break;
-                case 0: {
+                case 3:
+                {
+                    show_Stats (players.at(players.size ()-1));
+                }
+                    break;
+                case 0:
+                {
                     std::cout << "Exit Game";
                     return 0;
                 }

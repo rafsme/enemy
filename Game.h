@@ -33,6 +33,7 @@ public:
     void showMove(std::shared_ptr<Player> player);
     int print_Main_Menu(Game* game);
     void show_Selected(std::vector<std::shared_ptr<Player>> players);
+    void show_Stats(std::shared_ptr<Player> players);
 };
 
 
