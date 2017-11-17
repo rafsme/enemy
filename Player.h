@@ -9,6 +9,7 @@
 
 enum E_player
 {
+    E_cancel,
     E_warrior,
     E_rogue,
     E_mage

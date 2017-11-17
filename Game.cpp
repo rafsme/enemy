@@ -4,31 +4,57 @@
 
 #include "Game.h"
 #include "Factory.h"
+#include <cctype>
 
-std::vector<std::shared_ptr<Player>> Game::create_Player(std::vector<std::shared_ptr<Player>> players)
+std::vector<std::shared_ptr<Player>> Game::create_Player(std::vector<std::shared_ptr<Player>> &players)
 {
 
     Factory* factory = new Factory();
-
-    std::cout << "[1]: Warrior\n";
-    std::cout << "[2]: Rogue\n";
-    std::cout << "[3]: Mage\n";
-    std::cout << "[>]: ";
-
-    int x;
-    std::cin >> x;
-
-    switch (x)
+    while(1)
     {
-        case E_warrior:
-            players.push_back (factory->createPlayer (E_warrior));
-        case E_rogue:
-            players.push_back (factory->createPlayer (E_rogue));
-        case E_mage:
-            players.push_back (factory->createPlayer (E_mage));
+        std::cout << "\n[--> New Character\n\n";
+        std::cout << "[1]: Warrior\n";
+        std::cout << "[2]: Rogue\n";
+        std::cout << "[3]: Mage\n";
+        std::cout << "\n[0]: Cancel\n";
+        std::cout << "\n[>]: ";
+
+        int x;
+        std::cin >> x;
+        if(std::isdigit( x )==0)
+        {
+            switch (x)
+            {
+                case E_warrior:
+                {
+                    players.push_back (factory->createPlayer (E_warrior));
+                    delete factory;
+                    return players;
+                }
+
+                case E_rogue:
+                {
+                    players.push_back (factory->createPlayer (E_rogue));
+                    delete factory;
+                    return players;
+                }
+
+                case E_mage:
+                {
+                    players.push_back (factory->createPlayer (E_mage));
+                    delete factory;
+                    return players;
+                }
+
+                case E_cancel:
+                    return players;
+
+                default:
+                    std::cout << "\n";
+            }
+        }
     }
-    delete factory;
-    return players;
+
 }
 
 
@@ -108,32 +134,46 @@ void Game::print_moves(std::shared_ptr<Player> player,std::vector<Move*> moves)
 
 }
 
+void Game::show_Selected(std::vector<std::shared_ptr<Player>> players)
+{
+    if(players.empty ())
+        std::cout << "Empty";
+    else
+        std::cout << players.at(players.size ()-1)->c_name;
+    std::cout << " " << players.size ();
+}
+
 int Game::print_Main_Menu(Game* game)
 {
 
     while(1)
     {
+        std::cout << "\n[--> Main Menu\n\n";
         std::cout << "[1]: Create \n";
-
-        std::cout << "[2]: Select \n";
+        std::cout << "[2]: Select ( " ;
+        game->show_Selected (players);
+        std::cout << " )\n";
         std::cout << "[3]: Stats \n";
         std::cout << "[4]: Battle \n";
-        std::cout << "[0]: Exit \n";
-        std::cout << "[>]: ";
+        std::cout << "\n[0]: Exit \n";
+        std::cout << "\n[>]: ";
         int x;
         std::cin >> x;
-        switch(x)
+        if (std::isdigit( x)==0)
         {
-            case 1:
+            switch (x)
             {
-                game->create_Player(game->players);
+                case 1: {
+                    game->create_Player (game->players);
+                }
+                    break;
+                case 0: {
+                    std::cout << "Exit Game";
+                    return 0;
+                }
+                default:
+                    std::cout << "\n";
             }
-            break;
-            case 0:
-            {
-                std::cout << "Exit Game";
-                return 0;
-            }
-    }
+        }
     }
 }

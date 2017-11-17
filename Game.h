@@ -17,12 +17,14 @@ public:
     std::vector<Move*> moves;
     std::vector<std::shared_ptr<Player>> players;
     std::vector<std::shared_ptr<Enemy>>  enemies;
+    int a_player=0;
 
     Game()
     {
 
     }
-    std::vector<std::shared_ptr<Player>> create_Player(std::vector<std::shared_ptr<Player>> players);
+
+    std::vector<std::shared_ptr<Player>> create_Player(std::vector<std::shared_ptr<Player>> &players);
     std::vector<std::shared_ptr<Enemy>> create_Enemy(std::vector<std::shared_ptr<Enemy>> enemies);
     std::vector<Move*> create_moves(std::vector<Move*> moves);
     void print_battle(std::shared_ptr<Player> player, std::shared_ptr<Enemy> enemy);
@@ -30,6 +32,7 @@ public:
     void print_attacks();
     void showMove(std::shared_ptr<Player> player);
     int print_Main_Menu(Game* game);
+    void show_Selected(std::vector<std::shared_ptr<Player>> players);
 };
 
 
